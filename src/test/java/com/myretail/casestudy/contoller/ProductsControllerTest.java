@@ -21,7 +21,7 @@ class ProductsControllerTest {
   @Mock ProductInformationService productInformationService;
 
   @Test
-  void getProductInformationShouldReturnOkStatusWithProductInformation() {
+  void getProductInformation_ShouldReturnOkStatusWithProductInformation() {
     int productId = 12345;
 
     ProductCurrentPrice productCurrentPrice =
@@ -33,10 +33,10 @@ class ProductsControllerTest {
     when(productInformationService.getProductInformationById(anyInt()))
         .thenReturn(productInformation);
 
-    ResponseEntity<ProductInformation> responseEntity =
+    ResponseEntity<ProductInformation> response =
         productsController.getProductInformation(productId);
 
-    assertThat(responseEntity.getStatusCode()).isEqualByComparingTo(HttpStatus.OK);
-    assertThat(responseEntity.getBody()).isEqualToComparingFieldByField(productInformation);
+    assertThat(response.getStatusCode()).isEqualByComparingTo(HttpStatus.OK);
+    assertThat(response.getBody()).isEqualToComparingFieldByField(productInformation);
   }
 }

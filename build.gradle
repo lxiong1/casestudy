@@ -24,7 +24,6 @@ dependencies {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 	testImplementation 'org.mockito:mockito-core:3.3.3'
-
 }
 
 dependencyManagement {
