@@ -23,6 +23,17 @@ public class ProductCurrentPrice {
   @JsonProperty("currency_code")
   private String currencyCode;
 
+  public ProductCurrentPrice(
+      String id,
+      @NotEmpty int productId,
+      @NotNull @DecimalMin(value = "0.00") BigDecimal value,
+      @NotEmpty String currencyCode) {
+    this.id = id;
+    this.productId = productId;
+    this.value = value;
+    this.currencyCode = currencyCode;
+  }
+
   public String getId() {
     return id;
   }

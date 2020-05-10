@@ -16,6 +16,15 @@ public class ProductInformation {
   @JsonProperty("current_price")
   private ProductCurrentPrice productCurrentPrice;
 
+  public ProductInformation(
+      @NotNull int productId,
+      @NotEmpty String name,
+      @NotNull ProductCurrentPrice productCurrentPrice) {
+    this.productId = productId;
+    this.name = name;
+    this.productCurrentPrice = productCurrentPrice;
+  }
+
   public int getProductId() {
     return productId;
   }

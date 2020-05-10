@@ -50,11 +50,6 @@ public class ProductInformationService {
 
   private ProductInformation createProductInformation(
       int productId, String title, ProductCurrentPrice productCurrentPrice) {
-    ProductInformation productInformation = new ProductInformation();
-    productInformation.setProductId(productId);
-    productInformation.setName(title);
-    productInformation.setProductCurrentPrice(productCurrentPrice);
-
-    return productInformation;
+    return new ProductInformation(productId, title, productCurrentPrice);
   }
 }
