@@ -37,17 +37,24 @@ sudo systemctl start mongod
 mongo
 use myretaildb
 db.createCollection("product_current_price", {})
-db.test.insert({ "product_id": 13860428, "value": 13.49, "currency_code": "USD" })
+db.test.insert({ "_id": "43fa4b59-6d3e-4fa6-96b1-6595ba3fde6f", "productId": 13860428, "value": "14.49", "currencyCode": "USD", "_class": "com.myretail.casestudy.data.model.ProductCurrentPrice" })
 ``` 
-*Note: On insert operation, a unique ObjectId will automatically be created for the document*
-
+## Run Java Auto-formatter
+- Run the following command to auto-format .java files:
+```
+./gradlew goJF
+```
+- Run the following command to verify .java files properly formatted:
+```
+./gradlew verGJF
+```
 ## Test Application Code
 - Run the following command to run unit & integration tests:
 ```
 ./gradlew clean test
 ```
 
-## Create GET Request
+## Create GET & PUT Requests
 - Run the following command to start up the application:
 ```
 ./gradlew bootRun
