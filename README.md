@@ -60,5 +60,5 @@ curl -X GET --url http://localhost:8080/products/13860428
 ```
 - Run the following command to PUT request for saving/updating product information:
 ```
-curl -X PUT -H "Content-Type: application/json" -d '{"productId":13860428,"name":"The Big Lebowski (Blu-ray)","current_price":{"value":20.49,"currency_code":"USD"}}' --url http://localhost:8080/products/13860428
+curl -X PUT -H "Content-Type: application/json" -d '{ "value": 14.49, "currencyCode": "USD" }' --url http://localhost:8080/products/13860428
 ```
