@@ -15,13 +15,13 @@ public class ProductCurrentPriceService {
   }
 
   public void saveProductCurrentPrice(ProductCurrentPrice productCurrentPrice, int productId) {
-    ProductCurrentPrice ProductCurrentPriceDocument =
-        productCurrentPriceRepository.findByProductId(productId);
-
     if (productCurrentPrice.getValue() == null || productCurrentPrice.getCurrencyCode() == null) {
       throw new IllegalArgumentException(
           "Value and/or Currency Code in request body cannot be null");
     }
+
+    ProductCurrentPrice ProductCurrentPriceDocument =
+        productCurrentPriceRepository.findByProductId(productId);
 
     if (ProductCurrentPriceDocument == null) {
       productCurrentPrice.setId(UUID.randomUUID().toString());
