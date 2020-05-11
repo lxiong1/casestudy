@@ -36,6 +36,10 @@ public class ProductInformationService {
     }
   }
 
+  public boolean verifyProductIdSame(int productInformationProductId, int productId) {
+    return productInformationProductId == productId;
+  }
+
   public boolean verifyProductInformationExists(int productId) {
     return productInformationRepository.existsById(productId);
   }

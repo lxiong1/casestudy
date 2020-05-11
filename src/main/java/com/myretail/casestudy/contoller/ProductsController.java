@@ -25,9 +25,20 @@ public class ProductsController {
       value = ProductsControllerPath.PRODUCT_ID,
       consumes = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<String> updateProductInformation(
-      @RequestBody ProductInformation productInformation) {
-    if (productInformationService.verifyProductInformationExists(
-        productInformation.getProductId())) {
+      @RequestBody ProductInformation productInformation, @PathVariable int productId) {
+    int productInformationProductId = productInformation.getProductId();
+
+    if (!productInformationService.verifyProductIdSame(productInformationProductId, productId)) {
+      return new ResponseEntity<>(
+          "Product Id "
+              + productInformationProductId
+              + " from Product Information does not match product id "
+              + productId
+              + " from URL",
+          HttpStatus.BAD_REQUEST);
+    }
+
+    if (productInformationService.verifyProductInformationExists(productInformationProductId)) {
       productInformationService.saveProductInformation(productInformation);
 
       return new ResponseEntity<>(

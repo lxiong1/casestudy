@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class ProductCurrentPrice {
   @Id @JsonIgnore private String id;
 
-  @NotEmpty @JsonIgnore private int productId;
+  @NotNull @JsonIgnore private int productId;
 
   @NotNull
   @DecimalMin(value = "0.00")

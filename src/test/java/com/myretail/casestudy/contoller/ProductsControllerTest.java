@@ -54,7 +54,7 @@ class ProductsControllerTest {
     when(productInformationService.verifyProductInformationExists(anyInt())).thenReturn(true);
 
     ResponseEntity<String> response =
-        productsController.updateProductInformation(productInformation);
+        productsController.updateProductInformation(productInformation, productId);
 
     assertThat(response.getStatusCode()).isEqualByComparingTo(HttpStatus.OK);
     assertThat(response.getBody())
@@ -76,7 +76,7 @@ class ProductsControllerTest {
     when(productInformationService.verifyProductInformationExists(anyInt())).thenReturn(false);
 
     ResponseEntity<String> response =
-        productsController.updateProductInformation(productInformation);
+        productsController.updateProductInformation(productInformation, productId);
 
     assertThat(response.getStatusCode()).isEqualByComparingTo(HttpStatus.CREATED);
     assertThat(response.getBody())
