@@ -39,15 +39,21 @@ use myretaildb
 db.createCollection("product_current_price", {})
 db.test.insert({ "product_id": 13860428, "value": 13.49, "currency_code": "USD" })
 ``` 
+*Note: On insert operation, a unique ObjectId will automatically be created for the document*
 
-## Start Up Application
+## Test Application Code
+- Run the following command to run unit & integration tests:
+```
+./gradlew clean test
+```
+
+## Create GET Request
 - Run the following command to start up the application:
 ```
 ./gradlew bootRun
 ```
 *Note: The Spring Boot application will run on port 8080 so make sure this port is open.*
 
-## Request Endpoints
 - Run the following command to GET request for product information:
 ```
 curl --request GET --url http://localhost:8080/products/13860428
