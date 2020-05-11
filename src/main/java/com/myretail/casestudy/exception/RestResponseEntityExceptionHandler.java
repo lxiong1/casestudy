@@ -27,4 +27,11 @@ public class RestResponseEntityExceptionHandler {
   protected ResponseEntity<String> handleJsonParseException(JsonParseException jsonParseException) {
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(jsonParseException.getMessage());
   }
+
+  @ExceptionHandler(IllegalArgumentException.class)
+  protected ResponseEntity<String> handleIllegalArgumentException(
+      IllegalArgumentException illegalArgumentException) {
+    return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+        .body(illegalArgumentException.getMessage());
+  }
 }

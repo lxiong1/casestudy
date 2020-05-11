@@ -18,6 +18,11 @@ public class ProductCurrentPriceService {
     ProductCurrentPrice ProductCurrentPriceDocument =
         productCurrentPriceRepository.findByProductId(productId);
 
+    if (productCurrentPrice.getValue() == null || productCurrentPrice.getCurrencyCode() == null) {
+      throw new IllegalArgumentException(
+          "Value and/or Currency Code in request body cannot be null");
+    }
+
     if (ProductCurrentPriceDocument == null) {
       productCurrentPrice.setId(UUID.randomUUID().toString());
     } else {

@@ -83,7 +83,7 @@ public class ProductsControllerIntegrationTest {
 
   @Test
   void updateProductCurrentPrice_WhenProductCurrentPriceNonExistent_ShouldReturnCreatedStatus() {
-    int productId = new Random().nextInt(20);
+    int productId = new Random().nextInt(1000000000);
 
     HttpHeaders httpHeaders = new HttpHeaders();
     httpHeaders.setContentType(MediaType.valueOf(MediaType.APPLICATION_JSON_VALUE));
@@ -131,8 +131,30 @@ public class ProductsControllerIntegrationTest {
   }
 
   @Test
+  void updateProductCurrentPrice_WhenProductCurrentPriceEmptyJson_ShouldReturnBadRequestStatus() {
+    int productId = new Random().nextInt(1000000000);
+
+    HttpHeaders httpHeaders = new HttpHeaders();
+    httpHeaders.setContentType(MediaType.valueOf(MediaType.APPLICATION_JSON_VALUE));
+
+    RequestEntity<String> requestEntity =
+        new RequestEntity<>(
+            "{ }",
+            httpHeaders,
+            HttpMethod.PUT,
+            URI.create("http://localhost:" + port + ProductsControllerPath.BASE + "/" + productId),
+            String.class);
+
+    ResponseEntity<String> response = testRestTemplate.exchange(requestEntity, String.class);
+
+    assertThat(response.getStatusCode()).isEqualByComparingTo(HttpStatus.BAD_REQUEST);
+    assertThat(response.getBody())
+        .contains("Value and/or Currency Code in request body cannot be null");
+  }
+
+  @Test
   void updateProductCurrentPrice_WhenProductCurrentPriceNull_ShouldReturnBadRequestStatus() {
-    int productId = new Random().nextInt(20);
+    int productId = new Random().nextInt(1000000000);
 
     HttpHeaders httpHeaders = new HttpHeaders();
     httpHeaders.setContentType(MediaType.valueOf(MediaType.APPLICATION_JSON_VALUE));
@@ -153,7 +175,7 @@ public class ProductsControllerIntegrationTest {
 
   @Test
   void updateProductCurrentPrice_WhenProductCurrentPriceBlank_ShouldReturnBadRequestStatus() {
-    int productId = new Random().nextInt(20);
+    int productId = new Random().nextInt(1000000000);
 
     HttpHeaders httpHeaders = new HttpHeaders();
     httpHeaders.setContentType(MediaType.valueOf(MediaType.APPLICATION_JSON_VALUE));
@@ -174,7 +196,7 @@ public class ProductsControllerIntegrationTest {
 
   @Test
   void updateProductCurrentPrice_WhenProductCurrentPriceEmpty_ShouldReturnBadRequestStatus() {
-    int productId = new Random().nextInt(20);
+    int productId = new Random().nextInt(1000000000);
 
     HttpHeaders httpHeaders = new HttpHeaders();
     httpHeaders.setContentType(MediaType.valueOf(MediaType.APPLICATION_JSON_VALUE));
