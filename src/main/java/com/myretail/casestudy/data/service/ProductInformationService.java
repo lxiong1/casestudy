@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.myretail.casestudy.data.model.ProductCurrentPrice;
 import com.myretail.casestudy.data.model.ProductInformation;
 import com.myretail.casestudy.data.repository.ProductCurrentPriceRepository;
+import com.myretail.casestudy.data.repository.ProductInformationRepository;
 import com.myretail.casestudy.exception.JsonFieldNotFoundException;
 import com.myretail.casestudy.exception.JsonParseException;
 import com.myretail.casestudy.exception.ProductNotFoundException;
@@ -17,6 +18,7 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class ProductInformationService {
   @Autowired private ProductCurrentPriceRepository productCurrentPriceRepository;
+  @Autowired private ProductInformationRepository productInformationRepository;
   @Autowired private RestTemplate restTemplate;
   @Autowired ObjectMapper objectMapper;
 
@@ -32,6 +34,14 @@ public class ProductInformationService {
               + productId,
           restClientException);
     }
+  }
+
+  public boolean verifyProductInformationExists(int productId) {
+    return productInformationRepository.existsById(productId);
+  }
+
+  public void saveProductInformation(ProductInformation productInformation) {
+    productInformationRepository.save(productInformation);
   }
 
   private String getProductTitle(int productId) {

@@ -39,4 +39,48 @@ class ProductsControllerTest {
     assertThat(response.getStatusCode()).isEqualByComparingTo(HttpStatus.OK);
     assertThat(response.getBody()).isEqualToComparingFieldByField(productInformation);
   }
+
+  @Test
+  void
+      updateProductInformation_WhenProductInformationAlreadyExistsInDatabase_ShouldReturnOkStatus() {
+    int productId = 12345;
+
+    ProductCurrentPrice productCurrentPrice =
+        new ProductCurrentPrice(
+            Integer.toString(productId), productId, new BigDecimal("1.00"), "USD");
+    ProductInformation productInformation =
+        new ProductInformation(productId, "name", productCurrentPrice);
+
+    when(productInformationService.verifyProductInformationExists(anyInt())).thenReturn(true);
+
+    ResponseEntity<String> response =
+        productsController.updateProductInformation(productInformation);
+
+    assertThat(response.getStatusCode()).isEqualByComparingTo(HttpStatus.OK);
+    assertThat(response.getBody())
+        .isEqualTo(
+            "Product information with id " + productId + " has been updated in the database");
+  }
+
+  @Test
+  void
+      updateProductInformation_WhenProductInformationNonExistentInDatabase_ShouldReturnCreatedStatus() {
+    int productId = 12345;
+
+    ProductCurrentPrice productCurrentPrice =
+        new ProductCurrentPrice(
+            Integer.toString(productId), productId, new BigDecimal("1.00"), "USD");
+    ProductInformation productInformation =
+        new ProductInformation(productId, "name", productCurrentPrice);
+
+    when(productInformationService.verifyProductInformationExists(anyInt())).thenReturn(false);
+
+    ResponseEntity<String> response =
+        productsController.updateProductInformation(productInformation);
+
+    assertThat(response.getStatusCode()).isEqualByComparingTo(HttpStatus.CREATED);
+    assertThat(response.getBody())
+        .isEqualTo(
+            "Product information with id " + productId + " has been created in the database");
+  }
 }

@@ -20,4 +20,29 @@ public class ProductsController {
     return new ResponseEntity<>(
         productInformationService.getProductInformationById(productId), HttpStatus.OK);
   }
+
+  @PutMapping(
+      value = ProductsControllerPath.PRODUCT_ID,
+      consumes = MediaType.APPLICATION_JSON_VALUE)
+  public ResponseEntity<String> updateProductInformation(
+      @RequestBody ProductInformation productInformation) {
+    if (productInformationService.verifyProductInformationExists(
+        productInformation.getProductId())) {
+      productInformationService.saveProductInformation(productInformation);
+
+      return new ResponseEntity<>(
+          "Product information with id "
+              + productInformation.getProductId()
+              + " has been updated in the database",
+          HttpStatus.OK);
+    }
+
+    productInformationService.saveProductInformation(productInformation);
+
+    return new ResponseEntity<>(
+        "Product information with id "
+            + productInformation.getProductId()
+            + " has been created in the database",
+        HttpStatus.CREATED);
+  }
 }

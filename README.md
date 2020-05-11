@@ -56,5 +56,9 @@ db.test.insert({ "product_id": 13860428, "value": 13.49, "currency_code": "USD" 
 
 - Run the following command to GET request for product information:
 ```
-curl --request GET --url http://localhost:8080/products/13860428
+curl -X GET --url http://localhost:8080/products/13860428
+```
+- Run the following command to PUT request for saving/updating product information:
+```
+curl -X PUT -H "Content-Type: application/json" -d '{"productId":13860428,"name":"The Big Lebowski (Blu-ray)","current_price":{"value":13.49,"currency_code":"USD"}}' --url http://localhost:8080/products/13860428
 ```
