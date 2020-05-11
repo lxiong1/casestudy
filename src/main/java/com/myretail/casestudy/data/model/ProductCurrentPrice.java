@@ -11,9 +11,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "product_current_price")
 public class ProductCurrentPrice {
-  @Id @JsonIgnore private String id;
+  @Id private String id;
 
-  @NotNull @JsonIgnore private int productId;
+  @NotNull private int productId;
 
   @NotNull
   @DecimalMin(value = "0.00")
@@ -34,18 +34,22 @@ public class ProductCurrentPrice {
     this.currencyCode = currencyCode;
   }
 
+  @JsonIgnore
   public String getId() {
     return id;
   }
 
+  @JsonProperty
   public void setId(String id) {
     this.id = id;
   }
 
+  @JsonIgnore
   public int getProductId() {
     return productId;
   }
 
+  @JsonProperty
   public void setProductId(int productId) {
     this.productId = productId;
   }

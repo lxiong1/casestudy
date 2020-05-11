@@ -6,7 +6,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.myretail.casestudy.data.model.ProductCurrentPrice;
 import com.myretail.casestudy.data.model.ProductInformation;
 import com.myretail.casestudy.data.repository.ProductCurrentPriceRepository;
-import com.myretail.casestudy.data.repository.ProductInformationRepository;
 import com.myretail.casestudy.exception.JsonFieldNotFoundException;
 import com.myretail.casestudy.exception.JsonParseException;
 import com.myretail.casestudy.exception.ProductNotFoundException;
@@ -18,11 +17,8 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class ProductInformationService {
   @Autowired private ProductCurrentPriceRepository productCurrentPriceRepository;
-  @Autowired private ProductInformationRepository productInformationRepository;
   @Autowired private RestTemplate restTemplate;
   @Autowired ObjectMapper objectMapper;
-
-  private static final String TITLE = "title";
 
   public ProductInformation getProductInformationById(int productId) {
     try {
@@ -34,18 +30,6 @@ public class ProductInformationService {
               + productId,
           restClientException);
     }
-  }
-
-  public boolean verifyProductIdSame(int productInformationProductId, int productId) {
-    return productInformationProductId == productId;
-  }
-
-  public boolean verifyProductInformationExists(int productId) {
-    return productInformationRepository.existsById(productId);
-  }
-
-  public void saveProductInformation(ProductInformation productInformation) {
-    productInformationRepository.save(productInformation);
   }
 
   private String getProductTitle(int productId) {
@@ -64,10 +48,11 @@ public class ProductInformationService {
           "Unable to parse the redsky.target.com server response", jsonProcessingException);
     }
 
-    JsonNode titleNode = rootNode.findValue(TITLE);
+    String title = "title";
+    JsonNode titleNode = rootNode.findValue(title);
     if (titleNode == null) {
       throw new JsonFieldNotFoundException(
-          "The product with id " + productId + " does not have the given JSON field: " + TITLE);
+          "The product with id " + productId + " does not have the given JSON field: " + title);
     }
 
     return titleNode.asText();

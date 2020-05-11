@@ -1,6 +1,8 @@
 package com.myretail.casestudy.contoller;
 
+import com.myretail.casestudy.data.model.ProductCurrentPrice;
 import com.myretail.casestudy.data.model.ProductInformation;
+import com.myretail.casestudy.data.service.ProductCurrentPriceService;
 import com.myretail.casestudy.data.service.ProductInformationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping(ProductsControllerPath.BASE)
 public class ProductsController {
   @Autowired private ProductInformationService productInformationService;
+  @Autowired private ProductCurrentPriceService productCurrentPriceService;
 
   @GetMapping(
       value = ProductsControllerPath.PRODUCT_ID,
@@ -24,36 +27,20 @@ public class ProductsController {
   @PutMapping(
       value = ProductsControllerPath.PRODUCT_ID,
       consumes = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<String> updateProductInformation(
-      @RequestBody ProductInformation productInformation, @PathVariable int productId) {
-    int productInformationProductId = productInformation.getProductId();
-
-    if (!productInformationService.verifyProductIdSame(productInformationProductId, productId)) {
-      return new ResponseEntity<>(
-          "Product Id "
-              + productInformationProductId
-              + " from Product Information does not match product id "
-              + productId
-              + " from URL",
-          HttpStatus.BAD_REQUEST);
-    }
-
-    if (productInformationService.verifyProductInformationExists(productInformationProductId)) {
-      productInformationService.saveProductInformation(productInformation);
+  public ResponseEntity<String> updateProductCurrentPrice(
+      @RequestBody ProductCurrentPrice productCurrentPrice, @PathVariable int productId) {
+    if (productCurrentPriceService.verifyProductCurrentPriceExists(productId)) {
+      productCurrentPriceService.saveProductCurrentPrice(productCurrentPrice, productId);
 
       return new ResponseEntity<>(
-          "Product information with id "
-              + productInformation.getProductId()
-              + " has been updated in the database",
+          "Request Body with product id " + productId + " has been updated in the database",
           HttpStatus.OK);
     }
 
-    productInformationService.saveProductInformation(productInformation);
+    productCurrentPriceService.saveProductCurrentPrice(productCurrentPrice, productId);
 
     return new ResponseEntity<>(
-        "Product information with id "
-            + productInformation.getProductId()
-            + " has been created in the database",
+        "Request Body with product id " + productId + " has been created in the database",
         HttpStatus.CREATED);
   }
 }

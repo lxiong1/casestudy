@@ -8,4 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface ProductCurrentPriceRepository
     extends MongoRepository<ProductCurrentPrice, Integer> {
   ProductCurrentPrice findByProductId(int productId);
+
+  boolean existsByProductId(int productId);
 }
