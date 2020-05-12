@@ -18,7 +18,7 @@ public class ProductsControllerIntegrationTest {
 
   @Test
   void getProductInformation_ShouldReturnOkStatusWithProductInformation() {
-    int productId = 13860428;
+    int productId = 54456119;
 
     ResponseEntity<String> response =
         testRestTemplate.getForEntity(
@@ -67,7 +67,7 @@ public class ProductsControllerIntegrationTest {
 
     RequestEntity<String> requestEntity =
         new RequestEntity<>(
-            "{ \"value\": 14.49, \"currencyCode\": \"USD\" }",
+            "{ \"value\": 14.49, \"currency_code\": \"USD\" }",
             httpHeaders,
             HttpMethod.PUT,
             URI.create("http://localhost:" + port + ProductsControllerPath.BASE + "/" + productId),
@@ -90,7 +90,7 @@ public class ProductsControllerIntegrationTest {
 
     RequestEntity<String> requestEntity =
         new RequestEntity<>(
-            "{ \"value\": 14.49, \"currencyCode\": \"USD\" }",
+            "{ \"value\": 14.49, \"currency_code\": \"USD\" }",
             httpHeaders,
             HttpMethod.PUT,
             URI.create("http://localhost:" + port + ProductsControllerPath.BASE + "/" + productId),
@@ -113,7 +113,7 @@ public class ProductsControllerIntegrationTest {
 
     RequestEntity<String> requestEntity =
         new RequestEntity<>(
-            "{ \"value\": 14.49, \"currencyCode\": \"USD\" }",
+            "{ \"value\": 14.49, \"currency_code\": \"USD\" }",
             httpHeaders,
             HttpMethod.PUT,
             URI.create(

@@ -8,7 +8,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "product_information")
 public class ProductInformation {
-  @NotNull @Id private int productId;
+  @NotNull
+  @JsonProperty("product_id")
+  @Id
+  private int productId;
 
   @NotEmpty private String name;
 

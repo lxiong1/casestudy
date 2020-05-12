@@ -23,6 +23,8 @@ public class ProductCurrentPrice {
   @JsonProperty("currency_code")
   private String currencyCode;
 
+  public ProductCurrentPrice() {}
+
   public ProductCurrentPrice(
       String id,
       @NotEmpty int productId,
@@ -49,7 +51,7 @@ public class ProductCurrentPrice {
     return productId;
   }
 
-  @JsonProperty
+  @JsonProperty("product_id")
   public void setProductId(int productId) {
     this.productId = productId;
   }

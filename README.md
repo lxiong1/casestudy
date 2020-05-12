@@ -63,9 +63,9 @@ db.test.insert({ "_id": "43fa4b59-6d3e-4fa6-96b1-6595ba3fde6f", "productId": 138
 
 - Run the following command to GET request for product information:
 ```
-curl -X GET --url http://localhost:8080/products/13860428
+curl -X GET --url http://localhost:8080/products/54456119
 ```
 - Run the following command to PUT request for saving/updating product information:
 ```
-curl -X PUT -H "Content-Type: application/json" -d '{ "value": 14.49, "currencyCode": "USD" }' --url http://localhost:8080/products/13860428
+curl -X PUT -H "Content-Type: application/json" -d '{ "value": 14.49, "currency_code": "USD" }' --url http://localhost:8080/products/54456119
 ```

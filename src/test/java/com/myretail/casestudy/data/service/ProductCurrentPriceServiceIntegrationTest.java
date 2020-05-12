@@ -16,7 +16,7 @@ public class ProductCurrentPriceServiceIntegrationTest {
   @Autowired private ProductCurrentPriceRepository productCurrentPriceRepository;
 
   @Test
-  void getProductInformation_ShouldReturnOkStatusWithProductInformation() {
+  void saveProductCurrentPrice_ShouldSaveProductCurrentPriceToDatabase() {
     int productId = new Random().nextInt(100000000);
 
     ProductCurrentPrice productCurrentPrice =
@@ -26,6 +26,7 @@ public class ProductCurrentPriceServiceIntegrationTest {
     productCurrentPriceService.saveProductCurrentPrice(productCurrentPrice, productId);
 
     assertThat(productCurrentPriceRepository.findByProductId(productId))
-        .isInstanceOf(ProductCurrentPrice.class);
+        .isNotNull()
+        .isEqualToComparingOnlyGivenFields(productCurrentPrice);
   }
 }
