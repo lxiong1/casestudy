@@ -13,7 +13,7 @@ import org.springframework.http.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class ProductsControllerIntegrationTest {
-  @Autowired TestRestTemplate testRestTemplate;
+  @Autowired private TestRestTemplate testRestTemplate;
   @LocalServerPort private int port;
 
   @Test

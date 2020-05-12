@@ -26,10 +26,10 @@ import org.springframework.web.client.RestTemplate;
 
 @ExtendWith(MockitoExtension.class)
 class ProductInformationServiceTest {
-  @InjectMocks ProductInformationService productInformationService;
-  @Mock ProductCurrentPriceRepository productCurrentPriceRepository;
-  @Mock RestTemplate restTemplate;
-  @Mock ObjectMapper objectMapper;
+  @InjectMocks private ProductInformationService productInformationService;
+  @Mock private ProductCurrentPriceRepository productCurrentPriceRepository;
+  @Mock private RestTemplate restTemplate;
+  @Mock private ObjectMapper objectMapper;
 
   private final int productId = 12345;
 

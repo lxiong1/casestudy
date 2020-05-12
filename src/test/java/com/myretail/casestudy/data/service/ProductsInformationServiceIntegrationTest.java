@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class ProductsInformationIntegrationTest {
-  @Autowired ProductInformationService productInformationService;
+public class ProductsInformationServiceIntegrationTest {
+  @Autowired private ProductInformationService productInformationService;
 
   @Test
   void getProductInformation_ShouldReturnOkStatusWithProductInformation() {

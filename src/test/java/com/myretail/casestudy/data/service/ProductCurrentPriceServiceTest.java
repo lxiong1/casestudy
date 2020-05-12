@@ -3,8 +3,7 @@ package com.myretail.casestudy.data.service;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.mockito.ArgumentMatchers.*;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 import com.myretail.casestudy.data.model.ProductCurrentPrice;
 import com.myretail.casestudy.data.repository.ProductCurrentPriceRepository;
@@ -18,8 +17,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 @ExtendWith(MockitoExtension.class)
 class ProductCurrentPriceServiceTest {
-  @InjectMocks ProductCurrentPriceService productCurrentPriceService;
-  @Mock ProductCurrentPriceRepository productCurrentPriceRepository;
+  @InjectMocks private ProductCurrentPriceService productCurrentPriceService;
+  @Mock private ProductCurrentPriceRepository productCurrentPriceRepository;
 
   private final int productId = 12345;
 
@@ -61,5 +60,18 @@ class ProductCurrentPriceServiceTest {
         .isThrownBy(
             () ->
                 productCurrentPriceService.saveProductCurrentPrice(productCurrentPrice, productId));
+  }
+
+  @Test
+  void saveProductCurrentPrice_WhenProductCurrentPriceDocumentIsNull_ShouldSetId() {
+    ProductCurrentPrice productCurrentPriceMock = mock(ProductCurrentPrice.class);
+
+    when(productCurrentPriceMock.getValue()).thenReturn(new BigDecimal("1.00"));
+    when(productCurrentPriceMock.getCurrencyCode()).thenReturn("USD");
+    when(productCurrentPriceRepository.findByProductId(anyInt())).thenReturn(null);
+
+    productCurrentPriceService.saveProductCurrentPrice(productCurrentPriceMock, productId);
+
+    verify(productCurrentPriceMock, times(1)).setId(anyString());
   }
 }

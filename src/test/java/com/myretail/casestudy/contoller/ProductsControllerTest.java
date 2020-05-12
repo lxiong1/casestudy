@@ -18,9 +18,9 @@ import org.springframework.http.ResponseEntity;
 
 @ExtendWith(MockitoExtension.class)
 class ProductsControllerTest {
-  @InjectMocks ProductsController productsController;
-  @Mock ProductInformationService productInformationService;
-  @Mock ProductCurrentPriceService productCurrentPriceService;
+  @InjectMocks private ProductsController productsController;
+  @Mock private ProductInformationService productInformationService;
+  @Mock private ProductCurrentPriceService productCurrentPriceService;
 
   @Test
   void getProductInformation_ShouldReturnOkStatusWithProductInformation() {
